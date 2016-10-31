@@ -8,7 +8,13 @@ defmodule FlaskOnPhoenix.RoomChannel do
     {:error, %{reason: "unauthorized"}}
   end
 
-  def handle_in("sticky:create", %{"left" => x, "top" => y}, socket) do
+  def handle_in("sticky:create", %{"left" => x, "top" => y, "json" => z}, socket) do
+    # オブジェクトを作成
+    # user = Repo.get(User, socket.assigns[:user_id]) |> Repo.preload(:messages)
+    # object = Ecto.Model.build(object, :objects, content: object["body"])
+    changeset = Object.changeset(%Object{}, z)
+    Repo.insert!(changeset)
+
     broadcast! socket, "sticky:create", %{left: x, top: y}
     {:noreply, socket}
   end

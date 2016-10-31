@@ -38,6 +38,20 @@ window.onload = function(){
         originY: 'center'
       });
 
+        function all() {
+          $.ajax({
+            url: "/api/objects"
+          }).done((data) => {
+            console.log(data)
+            // 取得したデータをレンダーする
+            // data.objects.forEach((object) => this._renderObject(object))
+            canvas.loadFromJSON(data).renderAll()
+          }).fail((data) => {
+            alert("エラーが発生しました")
+            console.log(data)
+          })
+        }
+
       function animate(e, dir, callback) {
         if (e.target) {
           var org_scaleX = e.target.get('scaleX'),
@@ -97,7 +111,8 @@ window.onload = function(){
             var mouse_start_pos = canvas.getPointer(e.e);
                channel.push("sticky:create", {
                 left: mouse_start_pos.x,
-                top: mouse_start_pos.y
+                top: mouse_start_pos.y,
+                json: JSON.stringify(canvas)
                });
 
           } else {
