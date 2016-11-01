@@ -12,8 +12,12 @@ defmodule FlaskOnPhoenix.RoomChannel do
     # オブジェクトを作成
     # user = Repo.get(User, socket.assigns[:user_id]) |> Repo.preload(:messages)
     # object = Ecto.Model.build(object, :objects, content: object["body"])
-    changeset = Object.changeset(%Object{}, z)
-    Repo.insert!(changeset)
+    # changeset = Object.changeset(%Object{}, z)
+    changeset = %FlaskOnPhoenix.Object{content: "z"}  
+    FlaskOnPhoenix.Repo.insert!(changeset)   
+
+    # iex(1)> post = %EctoBlog.Post{title: "Hello", content: "Ecto"}     
+    # iex(2)> {:ok, inserted_post} = EctoBlog.Repo.insert(post)     
 
     broadcast! socket, "sticky:create", %{left: x, top: y}
     {:noreply, socket}

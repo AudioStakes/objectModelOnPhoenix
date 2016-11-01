@@ -11,9 +11,6 @@ defmodule FlaskOnPhoenix.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
-
-    # object一覧取得(:index)
-    get  "/object", ObjectController, :index
   end
 
   scope "/", FlaskOnPhoenix do
@@ -23,7 +20,10 @@ defmodule FlaskOnPhoenix.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", FlaskOnPhoenix do
-  #   pipe_through :api
-  # end
+  scope "/api", FlaskOnPhoenix do
+    pipe_through :api
+
+    # object一覧取得(:index)
+    get  "/objects", ObjectController, :index
+  end
 end
