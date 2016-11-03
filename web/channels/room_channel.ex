@@ -9,15 +9,11 @@ defmodule FlaskOnPhoenix.RoomChannel do
   end
 
   def handle_in("sticky:create", %{"left" => x, "top" => y, "json" => z}, socket) do
-    # オブジェクトを作成
-    # user = Repo.get(User, socket.assigns[:user_id]) |> Repo.preload(:messages)
-    # object = Ecto.Model.build(object, :objects, content: object["body"])
-    # changeset = Object.changeset(%Object{}, z)
-    changeset = %FlaskOnPhoenix.Object{content: "z"}  
-    FlaskOnPhoenix.Repo.insert!(changeset)   
-
-    # iex(1)> post = %EctoBlog.Post{title: "Hello", content: "Ecto"}     
-    # iex(2)> {:ok, inserted_post} = EctoBlog.Repo.insert(post)     
+    # DBをupdate
+    # 参考：http://www.phoenixframework.org/docs/ecto-modelsのupdate
+    object = FlaskOnPhoenix.Repo.get!(FlaskOnPhoenix.Object, 1)
+    changeset = FlaskOnPhoenix.Object.changeset(object, %{id: object.id, content: z})
+    FlaskOnPhoenix.Repo.update(changeset)
 
     broadcast! socket, "sticky:create", %{left: x, top: y}
     {:noreply, socket}

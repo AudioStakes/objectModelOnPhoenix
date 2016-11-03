@@ -38,19 +38,22 @@ window.onload = function(){
         originY: 'center'
       });
 
-        function all() {
-          $.ajax({
-            url: "/api/objects"
-          }).done((data) => {
-            console.log(data)
-            // 取得したデータをレンダーする
-            data.objects.forEach((object) => this._renderObject(object))
-            // canvas.loadFromJSON(data).renderAll()
-          }).fail((data) => {
-            alert("エラーが発生しました")
-            console.log(data)
-          })
-        }
+      function all() {
+        $.ajax({
+          url: "/api/objects"
+        }).done((data) => {
+          console.log("/api/objects")
+          console.log(data)
+          console.log(data.objects.body)
+          // 取得したデータをレンダーする
+          // data.objects.forEach((object) => this._renderObject(object))
+          canvas.loadFromJSON(data.objects.body).renderAll()
+        }).fail((data) => {
+          alert("エラーが発生しました")
+          console.log(data)
+        })
+      }
+      all();
 
       function animate(e, dir, callback) {
         if (e.target) {
@@ -114,7 +117,7 @@ window.onload = function(){
                 top: mouse_start_pos.y,
                 json: JSON.stringify(canvas)
                });
-          all();
+          // console.log(JSON.stringify(canvas))
 
           } else {
             canvas.trigger('mouse:click', e);

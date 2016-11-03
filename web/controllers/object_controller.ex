@@ -8,7 +8,8 @@ defmodule FlaskOnPhoenix.ObjectController do
   """
   def index(conn, _params) do
     # すべてのオブジェクトを取得。userも一緒にロードしておく
-    objects = Repo.all(Object)
+    objects = Repo.get!(Object, 1)
+    # objects = Repo.all(Object)
     render conn, :index, objects: objects
   end
 
