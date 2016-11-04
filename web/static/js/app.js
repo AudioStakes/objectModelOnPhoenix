@@ -115,10 +115,13 @@ window.onload = function(){
                channel.push("sticky:create", {
                 left: mouse_start_pos.x,
                 top: mouse_start_pos.y,
-                json: JSON.stringify(canvas)
+                json: JSON.stringify(canvas.toObject(['id']))
                });
           // console.log(JSON.stringify(canvas))
-
+        // var canvasJson = JSON.stringify(canvas.toObject(['id']));
+        // console.log('canvasJson');
+        // console.log(canvasJson);
+        
           } else {
             canvas.trigger('mouse:click', e);
           }
@@ -136,6 +139,7 @@ window.onload = function(){
       canvas.on('object:modified', function(e) {
         console.log('object:modified');
         console.log(e);
+
 
         if(typeof e.target.id === 'number') {
           var target = e.target;
@@ -178,8 +182,20 @@ window.onload = function(){
         id_counter++;
 
         // canvas 上に矩形を追加する
+        console.log("sticky")
+        console.log(sticky)
         canvas.add(sticky);
+        console.log("canvas.add")
+        console.log(canvas.getObjects())
       });
+
+      // fabric.Rect.prototype.toObject = (function(toObject) {
+      //   return function() {
+      //     return fabric.util.object.extend(toObject.call(this), {
+      //         objectId: this.Id,//my custom property
+      //     });
+      //   };
+      // };
 
       channel.on("sticky:modified", function(config){
         console.log('sticky:modified');
