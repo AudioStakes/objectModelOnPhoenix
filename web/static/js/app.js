@@ -175,7 +175,7 @@ window.onload = function(){
       channel.on("sticky:create", function(config){
         //矩形オブジェクトを作る
         var sticky = new fabric.Rect($.extend(defaultOptions, {
-          id: id_counter,
+          id: config.id,
           left: config.left,
           top: config.top
         }));
@@ -185,8 +185,8 @@ window.onload = function(){
         console.log("sticky")
         console.log(sticky)
         canvas.add(sticky);
-        console.log("canvas.add")
-        console.log(canvas.getObjects())
+        console.log("config.id")
+        console.log(config.id)
       });
 
       // fabric.Rect.prototype.toObject = (function(toObject) {
