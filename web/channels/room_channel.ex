@@ -43,9 +43,4 @@ defmodule FlaskOnPhoenix.RoomChannel do
     {:noreply, socket}
   end
 
-  def count(sentence) do
-    sentence
-    |> String.split
-    |> count
-  end
 end

@@ -111,6 +111,8 @@ window.onload = function(){
               return;
             }
 
+            // var number_of_sticky = Object.keys(JSON.parse(JSON.stringify(canvas))['objects']).length;
+            // TODO:↑の計算をサーバ側のＤＢから計算して、サーバからＩＤを付与するようにしたい
             var mouse_start_pos = canvas.getPointer(e.e);
                channel.push("sticky:create", {
                 left: mouse_start_pos.x,
