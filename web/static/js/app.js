@@ -264,7 +264,7 @@ window.onload = function(){
       channel.on("sticky:create", function(config){
         //矩形オブジェクトを作る
         var sticky = new fabric.IText("テキスト",$.extend({}, defaultOptions, {
-          id: id_counter,
+          id: config.id,
           left: config.left,
           top: config.top,
           backgroundColor: config.backgroundColor
